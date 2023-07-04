@@ -1,0 +1,443 @@
+{
+    "cell_supplier_pallet_id": {
+        "values": [
+            "2305150027",
+            "2305150027",
+            "2305150027",
+            "2305150027",
+            "2305150027"
+        ]
+    },
+    "cell_supplier_box_id": {
+        "values": [
+            "2305150027",
+            "2305150027",
+            "2305150027",
+            "2305150027",
+            "2305150027"
+        ]
+    },
+    "cell_id": {
+        "values": [
+            "884493203231478102304030475601236441",
+            "884493203231478102304030473201236441",
+            "884493203231478102304030483401236431",
+            "884493203231478102304030449401236431",
+            "884493203231478102304030405701236441"
+        ]
+    },
+    "cell_gbt": {
+        "values": [
+            "04QCE83H24200JD430001665",
+            "04QCE83H24200JD430001583",
+            "04QCE83H24200JD430001736",
+            "04QCE83H24200JD430001452",
+            "04QCE83H24200JD430001032"
+        ]
+    },
+    "cell_supplier_batch_vent_pressure_1_pa": {
+        "values": [
+            783000,
+            783000,
+            783000,
+            783000,
+            783000
+        ]
+    },
+    "cell_supplier_batch_vent_pressure_2_pa": {
+        "values": [
+            794000,
+            794000,
+            794000,
+            794000,
+            794000
+        ]
+    },
+    "cell_supplier_batch_vent_pressure_3_pa": {
+        "values": [
+            824000,
+            824000,
+            824000,
+            824000,
+            824000
+        ]
+    },
+    "cell_supplier_batch_vent_pressure_4_pa": {
+        "values": [
+            799000,
+            799000,
+            799000,
+            799000,
+            799000
+        ]
+    },
+    "cell_supplier_batch_vent_pressure_5_pa": {
+        "values": [
+            822000,
+            822000,
+            822000,
+            822000,
+            822000
+        ]
+    },
+    "cell_supplier_measurement_time": {
+        "values": [
+            "2023-05-14 17:34:47",
+            "2023-05-14 17:58:53",
+            "2023-05-14 18:00:29",
+            "2023-05-14 17:57:00",
+            "2023-05-14 14:35:02"
+        ]
+    },
+    "cell_supplier_capacity_ah": {
+        "values": [
+            117.858,
+            118.08193,
+            118.15794,
+            118.20236,
+            118.23242
+        ]
+    },
+    "cell_supplier_energy_wh": {
+        "values": [
+            441.74468,
+            442.00396,
+            442.188,
+            442.52948,
+            442.15164
+        ]
+    },
+    "cell_supplier_voltage_v": {
+        "values": [
+            3.6441,
+            3.6441,
+            3.6437,
+            3.6439,
+            3.644
+        ]
+    },
+    "cell_supplier_short_voltage_v": {
+        "values": [
+            350,
+            350,
+            350,
+            350,
+            350
+        ]
+    },
+    "cell_supplier_resistance_ac_w": {
+        "values": [
+            0.0005916,
+            0.0006042,
+            0.0005967,
+            0.0005896,
+            0.0005874
+        ]
+    },
+    "cell_supplier_resistance_rpt_w": {
+        "values": [
+            148000,
+            109000,
+            103000,
+            178000,
+            148000
+        ]
+    },
+    "cell_supplier_weight_electrolyte_g": {
+        "values": [
+            264.06,
+            263.6,
+            263.41,
+            263.84,
+            263.96
+        ]
+    },
+    "cell_supplier_short_current_mA": {
+        "values": [
+            0.0251617541337168,
+            0.0278440731901352,
+            0.0233333333333333,
+            0.0358974358974359,
+            0.035140562248996
+        ]
+    },
+    "cell_supplier_weight_g": {
+        "values": [
+            1754.28,
+            1751.74,
+            1755.05,
+            1752.49,
+            1753.79
+        ]
+    },
+    "cell_supplier_thickness_mp1_mm": {
+        "values": [
+            26.48,
+            26.44,
+            26.45,
+            26.47,
+            26.47
+        ]
+    },
+    "cell_supplier_thickness_mp2_mm": {
+        "values": [
+            26.69,
+            26.64,
+            26.65,
+            26.66,
+            26.62
+        ]
+    },
+    "cell_supplier_thickness_mp3_mm": {
+        "values": [
+            26.72,
+            26.7,
+            26.72,
+            26.67,
+            26.68
+        ]
+    },
+    "cell_supplier_thickness_mp4_mm": {
+        "values": [
+            26.69,
+            26.65,
+            26.68,
+            26.63,
+            26.62
+        ]
+    },
+    "cell_supplier_thickness_mp5_mm": {
+        "values": [
+            26.48,
+            26.49,
+            26.54,
+            26.46,
+            26.49
+        ]
+    },
+    "cell_supplier_thickness_mp6_mm": {
+        "values": [
+            26.59,
+            26.62,
+            26.57,
+            26.6,
+            26.55
+        ]
+    },
+    "cell_supplier_thickness_mp7_mm": {
+        "values": [
+            26.96,
+            26.88,
+            26.81,
+            26.83,
+            26.73
+        ]
+    },
+    "cell_supplier_thickness_mp8_mm": {
+        "values": [
+            27.08,
+            26.98,
+            26.92,
+            26.87,
+            26.85
+        ]
+    },
+    "cell_supplier_thickness_mp9_mm": {
+        "values": [
+            26.98,
+            26.88,
+            26.84,
+            26.7,
+            26.73
+        ]
+    },
+    "cell_supplier_thickness_mp10_mm": {
+        "values": [
+            26.61,
+            26.55,
+            26.58,
+            26.58,
+            26.56
+        ]
+    },
+    "cell_supplier_thickness_mp11_mm": {
+        "values": [
+            26.58,
+            26.62,
+            26.61,
+            26.59,
+            26.53
+        ]
+    },
+    "cell_supplier_thickness_mp12_mm": {
+        "values": [
+            26.95,
+            26.83,
+            26.75,
+            26.81,
+            26.74
+        ]
+    },
+    "cell_supplier_thickness_mp13_mm": {
+        "values": [
+            27.04,
+            26.92,
+            26.86,
+            26.83,
+            26.81
+        ]
+    },
+    "cell_supplier_thickness_mp14_mm": {
+        "values": [
+            26.97,
+            26.83,
+            26.8,
+            26.68,
+            26.73
+        ]
+    },
+    "cell_supplier_thickness_mp15_mm": {
+        "values": [
+            26.61,
+            26.58,
+            26.54,
+            26.57,
+            26.61
+        ]
+    },
+    "cell_supplier_thickness_mp16_mm": {
+        "values": [
+            26.5,
+            26.6,
+            26.58,
+            26.54,
+            26.43
+        ]
+    },
+    "cell_supplier_thickness_mp17_mm": {
+        "values": [
+            26.91,
+            26.8,
+            26.71,
+            26.7,
+            26.72
+        ]
+    },
+    "cell_supplier_thickness_mp18_mm": {
+        "values": [
+            26.94,
+            26.83,
+            26.79,
+            26.69,
+            26.76
+        ]
+    },
+    "cell_supplier_thickness_mp19_mm": {
+        "values": [
+            26.85,
+            26.76,
+            26.77,
+            26.61,
+            26.73
+        ]
+    },
+    "cell_supplier_thickness_mp20_mm": {
+        "values": [
+            26.57,
+            26.49,
+            26.53,
+            26.48,
+            26.54
+        ]
+    },
+    "cell_supplier_thickness_mp21_mm": {
+        "values": [
+            26.55,
+            26.56,
+            26.55,
+            26.56,
+            26.55
+        ]
+    },
+    "cell_supplier_thickness_mp22_mm": {
+        "values": [
+            26.62,
+            26.6,
+            26.59,
+            26.58,
+            26.58
+        ]
+    },
+    "cell_supplier_thickness_mp23_mm": {
+        "values": [
+            26.66,
+            26.64,
+            26.65,
+            26.62,
+            26.64
+        ]
+    },
+    "cell_supplier_thickness_mp24_mm": {
+        "values": [
+            26.6,
+            26.59,
+            26.61,
+            26.58,
+            26.58
+        ]
+    },
+    "cell_supplier_thickness_mp25_mm": {
+        "values": [
+            26.53,
+            26.53,
+            26.55,
+            26.52,
+            26.54
+        ]
+    },
+    "cell_supplier_length_mp26_mm": {
+        "values": [
+            301.44,
+            301.56,
+            301.43,
+            301.46,
+            301.47
+        ]
+    },
+    "cell_supplier_length_mp27_mm": {
+        "values": [
+            301.52,
+            301.54,
+            301.54,
+            301.56,
+            301.56
+        ]
+    },
+    "cell_supplier_length_mp28_mm": {
+        "values": [
+            301.65,
+            301.67,
+            301.68,
+            301.66,
+            301.66
+        ]
+    },
+    "cell_supplier_total_height_mp29_mm": {
+        "values": [
+            94.67,
+            94.72,
+            94.67,
+            94.7,
+            94.64
+        ]
+    },
+    "cell_supplier_body_height_mp30_mm": {
+        "values": [
+            90.94,
+            90.95,
+            90.96,
+            90.93,
+            90.94
+        ]
+    }
+}
