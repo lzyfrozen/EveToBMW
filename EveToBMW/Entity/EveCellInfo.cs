@@ -40,8 +40,8 @@ namespace EveToBMW
         public double cell_supplier_voltage_v { get; set; }
         [ExcelName("cell_supplier_short_voltage_v")]
         public double cell_supplier_short_voltage_v { get; set; }
-        [ExcelName("cell_supplier_resistance_ac_w")]
-        public double cell_supplier_resistance_ac_w { get; set; }
+        [ExcelName("cell_supplier_resistance_ac_mw")]
+        public double cell_supplier_resistance_ac_mw { get; set; }
         [ExcelName("cell_supplier_resistance_rpt_w")]
         public double cell_supplier_resistance_rpt_w { get; set; }
         [ExcelName("cell_supplier_weight_electrolyte_g")]

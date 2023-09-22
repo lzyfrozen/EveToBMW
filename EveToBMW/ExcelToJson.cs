@@ -258,7 +258,7 @@ namespace EveToBMW
                 _memoryCache.Set("token", GetToken(), new MemoryCacheEntryOptions()
                 {
                     //SlidingExpiration = TimeSpan.FromMinutes(5),
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30)
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(40)
                 });
             }
             access_token = _memoryCache.Get<string>("token");
@@ -366,7 +366,7 @@ namespace EveToBMW
                 cell.cell_supplier_energy_wh = 441 + (double)i / 1000;
                 cell.cell_supplier_voltage_v = 3 + (double)i / 1000;
                 cell.cell_supplier_short_voltage_v = 350;
-                cell.cell_supplier_resistance_ac_w = (double)i / 10000;
+                cell.cell_supplier_resistance_ac_mw = (double)i / 10000;
                 cell.cell_supplier_resistance_rpt_w = 148000 + i;
                 cell.cell_supplier_weight_electrolyte_g = 263 + (double)i / 1000;
                 cell.cell_supplier_short_current_mA = (double)i / 10000;
@@ -445,7 +445,7 @@ namespace EveToBMW
                 bmwCellInfo.cell_supplier_energy_wh.values = pageEveCellInfo.Select(l => l.cell_supplier_energy_wh).ToList();
                 bmwCellInfo.cell_supplier_voltage_v.values = pageEveCellInfo.Select(l => l.cell_supplier_voltage_v).ToList();
                 bmwCellInfo.cell_supplier_short_voltage_v.values = pageEveCellInfo.Select(l => l.cell_supplier_short_voltage_v).ToList();
-                bmwCellInfo.cell_supplier_resistance_ac_w.values = pageEveCellInfo.Select(l => l.cell_supplier_resistance_ac_w).ToList();
+                bmwCellInfo.cell_supplier_resistance_ac_mw.values = pageEveCellInfo.Select(l => l.cell_supplier_resistance_ac_mw).ToList();
                 bmwCellInfo.cell_supplier_resistance_rpt_w.values = pageEveCellInfo.Select(l => l.cell_supplier_resistance_rpt_w).ToList();
                 bmwCellInfo.cell_supplier_weight_electrolyte_g.values = pageEveCellInfo.Select(l => l.cell_supplier_weight_electrolyte_g).ToList();
                 bmwCellInfo.cell_supplier_short_current_mA.values = pageEveCellInfo.Select(l => l.cell_supplier_short_current_mA).ToList();

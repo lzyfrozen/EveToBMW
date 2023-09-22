@@ -22,7 +22,7 @@ namespace EveToBMW
         public cell_supplier_energy_wh cell_supplier_energy_wh { get; set; } = new cell_supplier_energy_wh();
         public cell_supplier_voltage_v cell_supplier_voltage_v { get; set; } = new cell_supplier_voltage_v();
         public cell_supplier_short_voltage_v cell_supplier_short_voltage_v { get; set; } = new cell_supplier_short_voltage_v();
-        public cell_supplier_resistance_ac_w cell_supplier_resistance_ac_w { get; set; } = new cell_supplier_resistance_ac_w();
+        public cell_supplier_resistance_ac_mw cell_supplier_resistance_ac_mw { get; set; } = new cell_supplier_resistance_ac_mw();
         public cell_supplier_resistance_rpt_w cell_supplier_resistance_rpt_w { get; set; } = new cell_supplier_resistance_rpt_w();
         public cell_supplier_weight_electrolyte_g cell_supplier_weight_electrolyte_g { get; set; } = new cell_supplier_weight_electrolyte_g();
         public cell_supplier_short_current_mA cell_supplier_short_current_mA { get; set; } = new cell_supplier_short_current_mA();
@@ -117,7 +117,7 @@ namespace EveToBMW
         public override string type { get; set; } = "double";
         public override string unit { get; set; } = "V";
     }
-    public class cell_supplier_resistance_ac_w : CellItemInfo<double>
+    public class cell_supplier_resistance_ac_mw : CellItemInfo<double>
     {
         public override string type { get; set; } = "double";
         public override string unit { get; set; } = "Ohm";

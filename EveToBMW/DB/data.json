@@ -125,7 +125,7 @@
             350
         ]
     },
-    "cell_supplier_resistance_ac_w": {
+    "cell_supplier_resistance_ac_mw": {
         "values": [
             0.0005916,
             0.0006042,

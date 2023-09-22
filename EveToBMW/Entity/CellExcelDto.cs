@@ -22,7 +22,7 @@ namespace EveToBMW
         public double cell_supplier_energy_wh { get; set; }
         public double cell_supplier_voltage_v { get; set; }
         public double cell_supplier_short_voltage_v { get; set; }
-        public double cell_supplier_resistance_ac_w { get; set; }
+        public double cell_supplier_resistance_ac_mw { get; set; }
         public double cell_supplier_resistance_rpt_w { get; set; }
         public double cell_supplier_weight_electrolyte_g { get; set; }
         public double cell_supplier_short_current_mA { get; set; }
