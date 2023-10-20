@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿using Microsoft.AspNetCore.Mvc.TagHelpers;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -305,6 +306,7 @@ namespace EveToBMW
                 dictHeader[worksheet.Cells[rowStart, i].Value.ToString()] = i;
             }
             var propertyInfoList = new List<PropertyInfo>(typeof(T).GetProperties());
+            rowStart = 19962;
             for (var row = rowStart + 1; row <= rowEnd; row++)
             {
                 var result = new T();
@@ -375,10 +377,21 @@ namespace EveToBMW
                                 p.SetValue(result, cell.GetValue<bool>());
                                 break;
                         }
+                        //Console.Write($"index:{row},colName:{colName.Name},value:{cell.Value}");
                     }
                     catch (KeyNotFoundException ex)
                     {
+                        if (ex.Message.Contains("The given key 'cell_supplier_box_id' was not present in the dictionary"))
+                        {
+                            continue;
+                        }
 
+                    }
+                    catch(Exception ex)
+                    {
+                        var colName = GetExcelName(p);
+                        var cell = worksheet.Cells[row, dictHeader[colName.Name]];
+                        throw new Exception($"index:{row},colName:{colName.Name},cell:{cell.Value}", ex);
                     }
                 }
                 if (IgnoreCheck != null && IgnoreCheck(result)) continue;
