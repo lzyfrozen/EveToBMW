@@ -23,7 +23,7 @@ namespace EveToBMW
         {
             string dataPath = Path.Combine(Directory.GetCurrentDirectory(), "DB\\excel2json-2.json");
 
-            //var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Upload");//1234
+            //var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Upload");//
             string savePath = Path.Combine(Directory.GetCurrentDirectory(), "Upload");
 
 

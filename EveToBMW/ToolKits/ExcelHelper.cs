@@ -306,7 +306,6 @@ namespace EveToBMW
                 dictHeader[worksheet.Cells[rowStart, i].Value.ToString()] = i;
             }
             var propertyInfoList = new List<PropertyInfo>(typeof(T).GetProperties());
-            rowStart = 19962;
             for (var row = rowStart + 1; row <= rowEnd; row++)
             {
                 var result = new T();
