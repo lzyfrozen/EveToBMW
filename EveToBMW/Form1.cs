@@ -19,9 +19,15 @@ namespace EveToBMW
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
-            string dataPath = Path.Combine(Directory.GetCurrentDirectory(), "DB\\excel2json-2.json");
+            string dataPath = Path.Combine(Directory.GetCurrentDirectory(), "DB\\excel2json-1.json");
 
             //var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Upload");//
             string savePath = Path.Combine(Directory.GetCurrentDirectory(), "Upload");
@@ -31,7 +37,7 @@ namespace EveToBMW
             List<BBACell>? list = JsonConvert.DeserializeObject<List<BBACell>>(jsonContent);
 
 
-            int pageSize = 5000;
+            int pageSize = 3;//5000
             var listCount = list.Count % pageSize == 0 ? list.Count / pageSize : list.Count / pageSize + 1;
 
             for (int i = 1; i <= listCount; i++)
@@ -44,11 +50,12 @@ namespace EveToBMW
                     di.Create();
                 }
 
-                File.WriteAllText(Path.Combine(savePath, $"ocvdata_{35 + i}.json"), pageBBACell.ToJson(true));
+                File.WriteAllText(Path.Combine(savePath, $"ocvdata_{i}.json"), pageBBACell.ToJson(true));
 
                 Console.WriteLine(i);
             }
 
         }
+
     }
 }
