@@ -18,6 +18,11 @@ namespace EveToBMW
             InitializeComponent();
         }
 
+        private void Demo_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             LogHelper logHelper = new LogHelper();
@@ -36,9 +41,5 @@ namespace EveToBMW
 
         }
 
-        private void Demo_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

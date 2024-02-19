@@ -24,7 +24,6 @@ namespace EveToBMW
 
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             string dataPath = Path.Combine(Directory.GetCurrentDirectory(), "DB\\excel2json-1.json");

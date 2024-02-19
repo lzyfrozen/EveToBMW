@@ -45,10 +45,10 @@
     <None Update="DB\excel2json-1.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Template\230612_Cell Format for Test.xlsx">
+    <None Update="Template\电芯字段映射对照-4050.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Template\电芯导入模板.xlsx">
+    <None Update="Template\电芯导入模板-4050.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
