@@ -15,6 +15,7 @@ namespace EveToBMW
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new Demo());
+            //Application.Run(new ExcelToJson());
             Application.Run(new ExcelToJsonBy4110());
             //Application.Run(new Form1());
         }

@@ -164,6 +164,9 @@ namespace EveToBMW
 
         private void btnSendBMW_Click(object sender, EventArgs e)
         {
+            //var token = GetToken();
+            //return;
+
             if (listBMWCellInfo == null || listBMWCellInfo.Count == 0)
             {
                 MessageBox.Show("没有数据,请导入或者查询!");
@@ -253,15 +256,15 @@ namespace EveToBMW
         {
             var dicHeader = new Dictionary<string, string>();
             string access_token = string.Empty;
-            if (!_memoryCache.TryGetValue("token", out access_token))
+            if (!_memoryCache.TryGetValue("token_4110", out access_token))
             {
-                _memoryCache.Set("token", GetToken(), new MemoryCacheEntryOptions()
+                _memoryCache.Set("token_4110", GetToken(), new MemoryCacheEntryOptions()
                 {
                     //SlidingExpiration = TimeSpan.FromMinutes(5),
                     AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(40)
                 });
             }
-            access_token = _memoryCache.Get<string>("token");
+            access_token = _memoryCache.Get<string>("token_4110");
             dicHeader.Add("Authorization", $"{access_token}");
 
             return dicHeader;
