@@ -1,0 +1,71 @@
+﻿--字段
+
+cell_id 
+cell_gbt 
+cell_supplier_measurement_time 
+cell_supplier_voltage_v 
+cell_supplier_capacity_ah 
+cell_supplier_energy_wh 
+cell_supplier_resistance_ac_w
+cell_supplier_resistance_dc_mw
+cell_supplier_short_voltage_v
+cell_supplier_short_current_mW
+cell_supplier_weight_g
+cell_supplier_weight_electrolyte_g
+cell_supplier_diameter_top_0deg_mm
+cell_supplier_diameter_bot_0deg_mm
+cell_supplier_total_height_mp29_mean_mm
+cell_supplier_total_height_mp29_med_mm
+cell_supplier_total_height_mp29_std_mm
+cell_supplier_batch_vent_pressure_mean_pa
+cell_supplier_batch_vent_pressure_med_pa
+cell_supplier_batch_vent_pressure_std_pa
+cell_supplier_pallet_id
+cell_supplier_box_id
+cell_supplier_diameter_top_120deg_mm
+cell_supplier_diameter_top_240deg_mm
+cell_supplier_diameter_mid_0deg_mm
+cell_supplier_diameter_mid_120deg_mm
+cell_supplier_diameter_mid_240deg_mm
+cell_supplier_diameter_bot_120deg_mm
+cell_supplier_diameter_bot_240deg_mm
+cell_supplier_total_height_mp29_mm
+cell_supplier_batch_vent_pressure_n
+
+-- EveCellInfoBy4110 definition
+
+CREATE TABLE EveCellInfoBy4110(
+cell_id                                         TEXT(36) NOT NULL PRIMARY KEY,--DMC码
+cell_gbt                                        TEXT NOT NULL,--国标码
+cell_supplier_measurement_time                  DATETIME NOT NULL,
+cell_supplier_voltage_v							NUMERIC NOT NULL,
+cell_supplier_capacity_ah						NUMERIC NOT NULL,
+cell_supplier_energy_wh							NUMERIC NOT NULL,
+cell_supplier_resistance_ac_w                   NUMERIC NOT NULL,
+cell_supplier_resistance_dc_mw                  NUMERIC NOT NULL,
+cell_supplier_short_voltage_v                   NUMERIC NOT NULL,
+cell_supplier_short_current_mW                  NUMERIC NOT NULL,
+cell_supplier_weight_g                          NUMERIC NOT NULL,
+cell_supplier_weight_electrolyte_g              NUMERIC NOT NULL,
+cell_supplier_diameter_top_0deg_mm              NUMERIC NOT NULL,
+cell_supplier_diameter_bot_0deg_mm              NUMERIC NOT NULL,
+cell_supplier_total_height_mp29_mean_mm         NUMERIC NOT NULL,
+cell_supplier_total_height_mp29_med_mm          NUMERIC NOT NULL,
+cell_supplier_total_height_mp29_std_mm          NUMERIC NOT NULL,
+cell_supplier_batch_vent_pressure_mean_pa       NUMERIC NOT NULL,
+cell_supplier_batch_vent_pressure_med_pa        NUMERIC NOT NULL,
+cell_supplier_batch_vent_pressure_std_pa        NUMERIC NOT NULL,
+cell_supplier_pallet_id                         TEXT NOT NULL,--托盘码
+cell_supplier_box_id                            TEXT NULL,--外箱码
+cell_supplier_diameter_top_120deg_mm            NUMERIC NULL,
+cell_supplier_diameter_top_240deg_mm            NUMERIC NULL,
+cell_supplier_diameter_mid_0deg_mm              NUMERIC NULL,
+cell_supplier_diameter_mid_120deg_mm            NUMERIC NULL,
+cell_supplier_diameter_mid_240deg_mm            NUMERIC NULL,
+cell_supplier_diameter_bot_120deg_mm            NUMERIC NULL,
+cell_supplier_diameter_bot_240deg_mm            NUMERIC NULL,
+cell_supplier_total_height_mp29_mm              NUMERIC NOT NULL,
+cell_supplier_batch_vent_pressure_n				NUMERIC NOT NULL,
+edi_send_flag						   			TEXT NOT NULL DEFAULT ('N'),			
+edi_send_time						   			DATETIME NULL
+);

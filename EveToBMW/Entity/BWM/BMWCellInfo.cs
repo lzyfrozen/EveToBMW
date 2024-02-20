@@ -59,15 +59,6 @@ namespace EveToBMW
         public cell_supplier_body_height_mp30_mm cell_supplier_body_height_mp30_mm { get; set; } = new cell_supplier_body_height_mp30_mm();
     }
 
-    public class CellItemInfo<T>
-    {
-        public virtual List<T> values { get; set; } = new List<T>();
-        public virtual string type { get; set; } = "string";
-        public virtual string nullable { get; set; } = "not nullable";
-        public virtual string unit { get; set; } = "string";
-
-    }
-
     public class cell_supplier_pallet_id : CellItemInfo<string> { }
     public class cell_supplier_box_id : CellItemInfo<string> { }
 

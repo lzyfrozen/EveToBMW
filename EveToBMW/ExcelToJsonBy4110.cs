@@ -24,7 +24,7 @@ namespace EveToBMW
         private delegate void ShowDelegate(TextBox textBox, string message, bool isClear = false);
         private ShowDelegate showDelegate;
         private Stopwatch sw = new Stopwatch();
-        private List<BMWCellInfo> listBMWCellInfo = new List<BMWCellInfo>();
+        private List<BMWCellInfoBy4110> listBMWCellInfo = new List<BMWCellInfoBy4110>();
         private readonly IEdiRequest _ediRequest = new EdiRequest();
         private LogHelper logHelper = new LogHelper();
         private readonly IMemoryCache _memoryCache = new MemoryCache(new MemoryCacheOptions());
@@ -79,7 +79,7 @@ namespace EveToBMW
                 }
                 string path = load.Item2;
 
-                List<EveCellInfo> lstExcel = new List<EveCellInfo>();
+                List<EveCellInfoBy4110> lstExcel = new List<EveCellInfoBy4110>();
 
                 sw.Start();
                 ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
@@ -88,11 +88,11 @@ namespace EveToBMW
                 showDelegate(tbContext, $"Excel{path}加载完毕,耗时{sw.ElapsedMilliseconds}");
 
                 sw.Restart();
-                var listEveCellInfo = ExcelHelper.Instance.LoadFromExcel<EveCellInfo>(lstworksheet[0], t => { return string.IsNullOrEmpty(t.cell_gbt); });
+                var listEveCellInfo = ExcelHelper.Instance.LoadFromExcel<EveCellInfoBy4110>(lstworksheet[0], t => { return string.IsNullOrEmpty(t.cell_gbt); });
                 sw.Stop();
                 showDelegate(tbContext, $"sheet表{lstworksheet[0].Name}读取完毕,耗时{sw.ElapsedMilliseconds}");
 
-                var lsit = SqliteHelper.SqlSugarDb.Queryable<EveCellInfo>().ToList();
+                var lsit = SqliteHelper.SqlSugarDb.Queryable<EveCellInfoBy4110>().ToList();
                 //insert db
                 sw.Restart();
                 SqliteHelper.SqlSugarDb.Insertable(listEveCellInfo).ExecuteCommand();
@@ -101,7 +101,7 @@ namespace EveToBMW
 
                 //query
                 sw.Restart();
-                var lsitEveCellInfo = SqliteHelper.SqlSugarDb.Queryable<EveCellInfo>().Where(l => l.edi_send_flag == "N").ToList();
+                var lsitEveCellInfo = SqliteHelper.SqlSugarDb.Queryable<EveCellInfoBy4110>().Where(l => l.edi_send_flag == "N").ToList();
                 sw.Stop();
                 showDelegate(tbContext, $"查询未发送记录{lsitEveCellInfo.Count}条,耗时{sw.ElapsedMilliseconds}");
 
@@ -139,7 +139,7 @@ namespace EveToBMW
             tbEveJson.Clear();
             //query
             sw.Restart();
-            var lsitEveCellInfo = SqliteHelper.SqlSugarDb.Queryable<EveCellInfo>().Where(l => l.edi_send_flag == "N").ToList();
+            var lsitEveCellInfo = SqliteHelper.SqlSugarDb.Queryable<EveCellInfoBy4110>().Where(l => l.edi_send_flag == "N").ToList();
             sw.Stop();
             showDelegate(tbContext, $"查询未发送记录{lsitEveCellInfo.Count}条,耗时{sw.ElapsedMilliseconds}");
 
@@ -198,12 +198,12 @@ namespace EveToBMW
             }
         }
 
-        private bool SendBMW(BMWCellInfo message, int index)
+        private bool SendBMW(BMWCellInfoBy4110 message, int index)
         {
             bool bSendFlag = false;
             try
             {
-                var ApiUrl = AppSettings.app(new[] { "BMW", "ApiUrl" });
+                var ApiUrl = AppSettings.app(new[] { "BMW4110", "ApiUrl" });
                 FeedbackDto dto = new FeedbackDto();
                 dto.PlatformNo = "BMW";
                 dto.Method = ApiUrl;
@@ -234,13 +234,13 @@ namespace EveToBMW
             return bSendFlag;
         }
 
-        private void ModifyData(BMWCellInfo message)
+        private void ModifyData(BMWCellInfoBy4110 message)
         {
-            var lsitEveCellInfo = SqliteHelper.SqlSugarDb.Queryable<EveCellInfo>().Where(l => l.edi_send_flag == "N").In(l => l.cell_gbt, message.cell_gbt.values).ToList();
+            var lsitEveCellInfo = SqliteHelper.SqlSugarDb.Queryable<EveCellInfoBy4110>().Where(l => l.edi_send_flag == "N").In(l => l.cell_gbt, message.cell_gbt.values).ToList();
             var dateNow = DateTime.Now;
             var lsitEveCellInfo_Edit = lsitEveCellInfo.Select(l => { l.edi_send_flag = "Y"; l.edi_send_time = dateNow; return l; }).ToList();
             //批量
-            SqliteHelper.SqlSugarDb.Fastest<EveCellInfo>().BulkUpdate(lsitEveCellInfo_Edit);
+            SqliteHelper.SqlSugarDb.Fastest<EveCellInfoBy4110>().BulkUpdate(lsitEveCellInfo_Edit);
 
             //var result = SqliteHelper.SqlSugarDb.Updateable(lsitEveCellInfo)
             //    .SetColumns(it=>it.edi_send_flag=="Y")
@@ -270,10 +270,10 @@ namespace EveToBMW
         private string GetToken()
         {
             var token = string.Empty;
-            var tokenApiUrl = AppSettings.app(new[] { "BMW", "Auth", "TokenApiUrl" });
-            var grantType = AppSettings.app(new[] { "BMW", "Auth", "GrantType" });
-            var userName = AppSettings.app(new[] { "BMW", "Auth", "UserName" });
-            var password = AppSettings.app(new[] { "BMW", "Auth", "Password" });
+            var tokenApiUrl = AppSettings.app(new[] { "BMW4110", "Auth", "TokenApiUrl" });
+            var grantType = AppSettings.app(new[] { "BMW4110", "Auth", "GrantType" });
+            var userName = AppSettings.app(new[] { "BMW4110", "Auth", "UserName" });
+            var password = AppSettings.app(new[] { "BMW4110", "Auth", "Password" });
             var encodeStr = Base64Helper.Base64Encode($"{userName}:{password}");
             var dicHeader = new Dictionary<string, string>();
             dicHeader.Add("Authorization", $"Basic {encodeStr}");
@@ -343,64 +343,47 @@ namespace EveToBMW
 
             return new Tuple<bool, string>(true, path);
         }
-        
+
         //测试
         private void TestDome()
         {
-            List<EveCellInfo> list = new List<EveCellInfo>();
+            List<EveCellInfoBy4110> list = new List<EveCellInfoBy4110>();
             for (int i = 1; i <= 120; i++)
             {
                 var end = "_" + i.ToString().PadLeft(4, '0');
-                EveCellInfo cell = new EveCellInfo();
-                cell.cell_supplier_pallet_id = "pallet_id" + end;
-                cell.cell_supplier_box_id = "box_id" + end;
+                EveCellInfoBy4110 cell = new EveCellInfoBy4110();
                 cell.cell_id = "id" + end;
                 cell.cell_gbt = "gbt" + end;
-                cell.cell_supplier_batch_vent_pressure_1_pa = 78300;
-                cell.cell_supplier_batch_vent_pressure_2_pa = 78300;
-                cell.cell_supplier_batch_vent_pressure_3_pa = 78300;
-                cell.cell_supplier_batch_vent_pressure_4_pa = 78300;
-                cell.cell_supplier_batch_vent_pressure_5_pa = 78300;
                 cell.cell_supplier_measurement_time = DateTime.Now.AddSeconds(i);
-                cell.cell_supplier_capacity_ah = 117 + (double)i / 1000;
-                cell.cell_supplier_energy_wh = 441 + (double)i / 1000;
-                cell.cell_supplier_voltage_v = 3 + (double)i / 1000;
+                cell.cell_supplier_voltage_v = 3621 + (double)i / 1000;
+                cell.cell_supplier_capacity_ah = 33023 + (double)i / 1000;
+                cell.cell_supplier_energy_wh = 121379 + (double)i / 1000;
+                cell.cell_supplier_resistance_ac_w = 1 + (double)i / 1000;
+                cell.cell_supplier_resistance_dc_mw = 3 + (double)i / 1000;
                 cell.cell_supplier_short_voltage_v = 350;
-                cell.cell_supplier_resistance_ac_mw = (double)i / 10000;
-                cell.cell_supplier_resistance_rpt_w = 148000 + i;
-                cell.cell_supplier_weight_electrolyte_g = 263 + (double)i / 1000;
-                cell.cell_supplier_short_current_mA = (double)i / 10000;
-                cell.cell_supplier_weight_g = 1751 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp1_mm = 21 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp2_mm = 22 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp3_mm = 23 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp4_mm = 24 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp5_mm = 25 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp6_mm = 26 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp7_mm = 27 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp8_mm = 28 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp9_mm = 29 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp10_mm = 30 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp11_mm = 31 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp12_mm = 32 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp13_mm = 33 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp14_mm = 34 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp15_mm = 35 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp16_mm = 36 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp17_mm = 37 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp18_mm = 38 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp19_mm = 39 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp20_mm = 40 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp21_mm = 41 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp22_mm = 42 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp23_mm = 43 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp24_mm = 44 + (double)i / 1000;
-                cell.cell_supplier_thickness_mp25_mm = 45 + (double)i / 1000;
-                cell.cell_supplier_length_mp26_mm = 46 + (double)i / 1000;
-                cell.cell_supplier_length_mp27_mm = 47 + (double)i / 1000;
-                cell.cell_supplier_length_mp28_mm = 48 + (double)i / 1000;
-                cell.cell_supplier_total_height_mp29_mm = 49 + (double)i / 1000;
-                cell.cell_supplier_body_height_mp30_mm = 50 + (double)i / 1000;
+                cell.cell_supplier_short_current_mW = 108 + (double)i / 1000;
+                cell.cell_supplier_weight_g = 417 + (double)i / 1000;
+                cell.cell_supplier_weight_electrolyte_g = 39 + (double)i / 1000;
+                cell.cell_supplier_diameter_top_0deg_mm = 46 + (double)i / 1000;
+                cell.cell_supplier_diameter_bot_0deg_mm = 46 + (double)i / 1000;
+                cell.cell_supplier_total_height_mp29_mean_mm = 97 + (double)i / 1000;
+                cell.cell_supplier_total_height_mp29_med_mm = 97 + (double)i / 1000;
+                cell.cell_supplier_total_height_mp29_std_mm = 97 + (double)i / 1000;
+                cell.cell_supplier_batch_vent_pressure_mean_pa = 1 + (double)i / 1000;
+                cell.cell_supplier_batch_vent_pressure_med_pa = 1 + (double)i / 1000;
+                cell.cell_supplier_batch_vent_pressure_std_pa = 1 + (double)i / 1000;
+                cell.cell_supplier_pallet_id = "pallet_id" + end;
+                cell.cell_supplier_box_id = "box_id" + end;
+                cell.cell_supplier_diameter_top_120deg_mm = null;
+                cell.cell_supplier_diameter_top_240deg_mm = null;
+                cell.cell_supplier_diameter_mid_0deg_mm = null;
+                cell.cell_supplier_diameter_mid_120deg_mm = null;
+                cell.cell_supplier_diameter_mid_240deg_mm = null;
+                cell.cell_supplier_diameter_bot_120deg_mm = null;
+                cell.cell_supplier_diameter_bot_240deg_mm = null;
+                cell.cell_supplier_total_height_mp29_mm = 1;
+                cell.cell_supplier_batch_vent_pressure_n = 1;
+
                 list.Add(cell);
             }
 
@@ -418,68 +401,50 @@ namespace EveToBMW
         /// </summary>
         /// <param name="listEveCellInfo"></param>
         /// <returns></returns>
-        private List<BMWCellInfo> EveMapToBMW(List<EveCellInfo> listEveCellInfo)
+        private List<BMWCellInfoBy4110> EveMapToBMW(List<EveCellInfoBy4110> listEveCellInfo)
         {
             var messageSize = int.Parse(AppSettings.app(new[] { "BMW", "MessageSize" }));
             var listCount = listEveCellInfo.Count % messageSize == 0 ? listEveCellInfo.Count / messageSize : listEveCellInfo.Count / messageSize + 1;
 
-            List<BMWCellInfo> list = new List<BMWCellInfo>();
+            List<BMWCellInfoBy4110> list = new List<BMWCellInfoBy4110>();
 
             for (int i = 1; i <= listCount; i++)
             {
                 var pageEveCellInfo = listEveCellInfo.Skip(messageSize * (i - 1)).Take(messageSize);
 
-                BMWCellInfo bmwCellInfo = new BMWCellInfo();
+                BMWCellInfoBy4110 bmwCellInfo = new BMWCellInfoBy4110();
 
-                bmwCellInfo.cell_supplier_pallet_id.values = pageEveCellInfo.Select(l => l.cell_supplier_pallet_id).ToList();
-                bmwCellInfo.cell_supplier_box_id.values = pageEveCellInfo.Select(l => l.cell_supplier_box_id ?? string.Empty).ToList();
                 bmwCellInfo.cell_id.values = pageEveCellInfo.Select(l => l.cell_id).ToList();
                 bmwCellInfo.cell_gbt.values = pageEveCellInfo.Select(l => l.cell_gbt).ToList();
-                bmwCellInfo.cell_supplier_batch_vent_pressure_1_pa.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_1_pa).ToList();
-                bmwCellInfo.cell_supplier_batch_vent_pressure_2_pa.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_2_pa).ToList();
-                bmwCellInfo.cell_supplier_batch_vent_pressure_3_pa.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_3_pa).ToList();
-                bmwCellInfo.cell_supplier_batch_vent_pressure_4_pa.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_4_pa).ToList();
-                bmwCellInfo.cell_supplier_batch_vent_pressure_5_pa.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_5_pa).ToList();
                 bmwCellInfo.cell_supplier_measurement_time.values = pageEveCellInfo.Select(l => l.cell_supplier_measurement_time).ToList();
+                bmwCellInfo.cell_supplier_voltage_v.values = pageEveCellInfo.Select(l => l.cell_supplier_voltage_v).ToList();
                 bmwCellInfo.cell_supplier_capacity_ah.values = pageEveCellInfo.Select(l => l.cell_supplier_capacity_ah).ToList();
                 bmwCellInfo.cell_supplier_energy_wh.values = pageEveCellInfo.Select(l => l.cell_supplier_energy_wh).ToList();
-                bmwCellInfo.cell_supplier_voltage_v.values = pageEveCellInfo.Select(l => l.cell_supplier_voltage_v).ToList();
+                bmwCellInfo.cell_supplier_resistance_ac_w.values = pageEveCellInfo.Select(l => l.cell_supplier_resistance_ac_w).ToList();
+                bmwCellInfo.cell_supplier_resistance_dc_mw.values = pageEveCellInfo.Select(l => l.cell_supplier_resistance_dc_mw).ToList();
                 bmwCellInfo.cell_supplier_short_voltage_v.values = pageEveCellInfo.Select(l => l.cell_supplier_short_voltage_v).ToList();
-                bmwCellInfo.cell_supplier_resistance_ac_mw.values = pageEveCellInfo.Select(l => l.cell_supplier_resistance_ac_mw).ToList();
-                bmwCellInfo.cell_supplier_resistance_rpt_w.values = pageEveCellInfo.Select(l => l.cell_supplier_resistance_rpt_w).ToList();
-                bmwCellInfo.cell_supplier_weight_electrolyte_g.values = pageEveCellInfo.Select(l => l.cell_supplier_weight_electrolyte_g).ToList();
-                bmwCellInfo.cell_supplier_short_current_mA.values = pageEveCellInfo.Select(l => l.cell_supplier_short_current_mA).ToList();
+                bmwCellInfo.cell_supplier_short_current_mW.values = pageEveCellInfo.Select(l => l.cell_supplier_short_current_mW).ToList();
                 bmwCellInfo.cell_supplier_weight_g.values = pageEveCellInfo.Select(l => l.cell_supplier_weight_g).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp1_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp1_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp2_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp2_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp3_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp3_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp4_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp4_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp5_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp5_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp6_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp6_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp7_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp7_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp8_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp8_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp9_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp9_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp10_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp10_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp11_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp11_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp12_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp12_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp13_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp13_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp14_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp14_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp15_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp15_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp16_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp16_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp17_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp17_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp18_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp18_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp19_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp19_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp20_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp20_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp21_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp21_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp22_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp22_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp23_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp23_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp24_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp24_mm).ToList();
-                bmwCellInfo.cell_supplier_thickness_mp25_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_thickness_mp25_mm).ToList();
-                bmwCellInfo.cell_supplier_length_mp26_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_length_mp26_mm).ToList();
-                bmwCellInfo.cell_supplier_length_mp27_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_length_mp27_mm).ToList();
-                bmwCellInfo.cell_supplier_length_mp28_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_length_mp28_mm).ToList();
+                bmwCellInfo.cell_supplier_weight_electrolyte_g.values = pageEveCellInfo.Select(l => l.cell_supplier_weight_electrolyte_g).ToList();
+                bmwCellInfo.cell_supplier_diameter_top_0deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_top_0deg_mm).ToList();
+                bmwCellInfo.cell_supplier_diameter_bot_0deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_bot_0deg_mm).ToList();
+                bmwCellInfo.cell_supplier_total_height_mp29_mean_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_total_height_mp29_mean_mm).ToList();
+                bmwCellInfo.cell_supplier_total_height_mp29_med_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_total_height_mp29_med_mm).ToList();
+                bmwCellInfo.cell_supplier_total_height_mp29_std_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_total_height_mp29_std_mm).ToList();
+                bmwCellInfo.cell_supplier_batch_vent_pressure_mean_pa.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_mean_pa).ToList();
+                bmwCellInfo.cell_supplier_batch_vent_pressure_med_pa.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_med_pa).ToList();
+                bmwCellInfo.cell_supplier_batch_vent_pressure_std_pa.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_std_pa).ToList();
+                bmwCellInfo.cell_supplier_pallet_id.values = pageEveCellInfo.Select(l => l.cell_supplier_pallet_id).ToList();
+                bmwCellInfo.cell_supplier_box_id.values = pageEveCellInfo.Select(l => l.cell_supplier_box_id ?? string.Empty).ToList();
+                bmwCellInfo.cell_supplier_diameter_top_120deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_top_120deg_mm).ToList();
+                bmwCellInfo.cell_supplier_diameter_top_240deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_top_240deg_mm).ToList();
+                bmwCellInfo.cell_supplier_diameter_mid_0deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_mid_0deg_mm).ToList();
+                bmwCellInfo.cell_supplier_diameter_mid_120deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_mid_120deg_mm).ToList();
+                bmwCellInfo.cell_supplier_diameter_mid_240deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_mid_240deg_mm).ToList();
+                bmwCellInfo.cell_supplier_diameter_bot_120deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_bot_120deg_mm).ToList();
+                bmwCellInfo.cell_supplier_diameter_bot_240deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_bot_240deg_mm).ToList();
                 bmwCellInfo.cell_supplier_total_height_mp29_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_total_height_mp29_mm).ToList();
-                bmwCellInfo.cell_supplier_body_height_mp30_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_body_height_mp30_mm).ToList();
+                bmwCellInfo.cell_supplier_batch_vent_pressure_n.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_n).ToList();
 
                 list.Add(bmwCellInfo);
             }
