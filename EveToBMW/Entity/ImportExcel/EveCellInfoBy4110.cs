@@ -97,8 +97,8 @@ namespace EveToBMW
         [ExcelName("cell_supplier_diameter_bot_240deg_mm")]
         public double? cell_supplier_diameter_bot_240deg_mm { get; set; }
 
-        [ExcelName("cell_supplier_total_height_mp29_mm")]
-        public double cell_supplier_total_height_mp29_mm { get; set; }
+        [ExcelName("cell_supplier_total_height_mp29_n")]
+        public double cell_supplier_total_height_mp29_n { get; set; }
 
         [ExcelName("cell_supplier_batch_vent_pressure_n")]
         public double cell_supplier_batch_vent_pressure_n { get; set; }

@@ -37,7 +37,7 @@ namespace EveToBMW
         public DoubleOrNullBy4110 cell_supplier_diameter_mid_240deg_mm = new DoubleOrNullBy4110();
         public DoubleOrNullBy4110 cell_supplier_diameter_bot_120deg_mm = new DoubleOrNullBy4110();
         public DoubleOrNullBy4110 cell_supplier_diameter_bot_240deg_mm = new DoubleOrNullBy4110();
-        public DoubleBy4110 cell_supplier_total_height_mp29_mm = new DoubleBy4110();
+        public DoubleBy4110 cell_supplier_total_height_mp29_n = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_batch_vent_pressure_n = new DoubleBy4110();
     }
 

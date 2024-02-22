@@ -29,7 +29,7 @@ cell_supplier_diameter_mid_120deg_mm
 cell_supplier_diameter_mid_240deg_mm
 cell_supplier_diameter_bot_120deg_mm
 cell_supplier_diameter_bot_240deg_mm
-cell_supplier_total_height_mp29_mm
+cell_supplier_total_height_mp29_n
 cell_supplier_batch_vent_pressure_n
 
 -- EveCellInfoBy4110 definition
@@ -64,7 +64,7 @@ cell_supplier_diameter_mid_120deg_mm            NUMERIC NULL,
 cell_supplier_diameter_mid_240deg_mm            NUMERIC NULL,
 cell_supplier_diameter_bot_120deg_mm            NUMERIC NULL,
 cell_supplier_diameter_bot_240deg_mm            NUMERIC NULL,
-cell_supplier_total_height_mp29_mm              NUMERIC NOT NULL,
+cell_supplier_total_height_mp29_n              NUMERIC NOT NULL,
 cell_supplier_batch_vent_pressure_n				NUMERIC NOT NULL,
 edi_send_flag						   			TEXT NOT NULL DEFAULT ('N'),			
 edi_send_time						   			DATETIME NULL

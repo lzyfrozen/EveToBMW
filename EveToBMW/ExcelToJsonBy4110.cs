@@ -384,7 +384,7 @@ namespace EveToBMW
                 cell.cell_supplier_diameter_mid_240deg_mm = null;
                 cell.cell_supplier_diameter_bot_120deg_mm = null;
                 cell.cell_supplier_diameter_bot_240deg_mm = null;
-                cell.cell_supplier_total_height_mp29_mm = 1;
+                cell.cell_supplier_total_height_mp29_n = 1;
                 cell.cell_supplier_batch_vent_pressure_n = 1;
 
                 list.Add(cell);
@@ -446,7 +446,7 @@ namespace EveToBMW
                 bmwCellInfo.cell_supplier_diameter_mid_240deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_mid_240deg_mm).ToList();
                 bmwCellInfo.cell_supplier_diameter_bot_120deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_bot_120deg_mm).ToList();
                 bmwCellInfo.cell_supplier_diameter_bot_240deg_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_diameter_bot_240deg_mm).ToList();
-                bmwCellInfo.cell_supplier_total_height_mp29_mm.values = pageEveCellInfo.Select(l => l.cell_supplier_total_height_mp29_mm).ToList();
+                bmwCellInfo.cell_supplier_total_height_mp29_n.values = pageEveCellInfo.Select(l => l.cell_supplier_total_height_mp29_n).ToList();
                 bmwCellInfo.cell_supplier_batch_vent_pressure_n.values = pageEveCellInfo.Select(l => l.cell_supplier_batch_vent_pressure_n).ToList();
 
                 list.Add(bmwCellInfo);
