@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            bMW11JToolStripMenuItem = new ToolStripMenuItem();
+            bMW4050ToolStripMenuItem = new ToolStripMenuItem();
             bMW4110ToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -37,19 +37,19 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { bMW11JToolStripMenuItem, bMW4110ToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { bMW4050ToolStripMenuItem, bMW4110ToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // bMW11JToolStripMenuItem
+            // bMW4050ToolStripMenuItem
             // 
-            bMW11JToolStripMenuItem.Name = "bMW11JToolStripMenuItem";
-            bMW11JToolStripMenuItem.Size = new Size(92, 24);
-            bMW11JToolStripMenuItem.Text = "BMW-11J";
-            bMW11JToolStripMenuItem.Click += bMW11JToolStripMenuItem_Click;
+            bMW4050ToolStripMenuItem.Name = "bMW4050ToolStripMenuItem";
+            bMW4050ToolStripMenuItem.Size = new Size(104, 24);
+            bMW4050ToolStripMenuItem.Text = "BMW-4050";
+            bMW4050ToolStripMenuItem.Click += bMW4050ToolStripMenuItem_Click;
             // 
             // bMW4110ToolStripMenuItem
             // 
@@ -77,7 +77,7 @@
         #endregion
 
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem bMW11JToolStripMenuItem;
+        private ToolStripMenuItem bMW4050ToolStripMenuItem;
         private ToolStripMenuItem bMW4110ToolStripMenuItem;
     }
 }

@@ -24,6 +24,11 @@ namespace EveToBMW
 
         private void bMW11JToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void bMW4050ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             ExcelToJson excelToJson = GenericSingleton<ExcelToJson>.CreateInstrance();
             excelToJson.Show();
         }
