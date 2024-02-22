@@ -236,7 +236,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "ExcelToJsonBy4110";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ExcelToJsonBy4110";
+            Text = "ExcelToJson-4110";
             Load += ExcelToJson_Load;
             tableLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
