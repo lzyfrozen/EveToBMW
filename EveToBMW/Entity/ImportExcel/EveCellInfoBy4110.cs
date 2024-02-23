@@ -101,7 +101,7 @@ namespace EveToBMW
         public double cell_supplier_total_height_mp29_n { get; set; }
 
         [ExcelName("cell_supplier_batch_vent_pressure_n")]
-        public double cell_supplier_batch_vent_pressure_n { get; set; }
+        public double? cell_supplier_batch_vent_pressure_n { get; set; }
 
         public string edi_send_flag { get; set; } = "N";
 
