@@ -26,6 +26,19 @@ namespace EveToBMW
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var str = "System.Nullable`1[[System.Double, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]";
+            var a1 = str.IndexOf("System.Nullable");
+            var a2 = str.IndexOf("[[");
+            var a3 = str.IndexOf(",");
+            var a4 = str.Substring(a2 + 2, a3 - a2 - 2);
+            Console.WriteLine(str);
+            Console.WriteLine(a1);
+            Console.WriteLine(a4);
+
+
+            return;
+
+
             string dataPath = Path.Combine(Directory.GetCurrentDirectory(), "DB\\excel2json-1.json");
 
             //var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Upload");//

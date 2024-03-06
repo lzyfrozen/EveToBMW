@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EveToBMW
@@ -319,9 +320,18 @@ namespace EveToBMW
                         if (colName == null) continue;
                         var cell = worksheet.Cells[row, dictHeader[colName.Name]]; //与属性名对应的单元格
 
-                        if (cell.Value == null)
-                            continue;
-                        switch (p.PropertyType.FullName)
+                        if (cell.Value == null) continue;
+
+                        var propertyTypeFullName = p.PropertyType.FullName;
+                        if (propertyTypeFullName != null && propertyTypeFullName.IndexOf("System.Nullable") != -1)
+                        {
+                            var strartIndex = propertyTypeFullName.IndexOf("[[");
+                            var endIndex = propertyTypeFullName.IndexOf(",");
+                            propertyTypeFullName = propertyTypeFullName?.Substring(strartIndex + 2, endIndex - strartIndex - 2);
+                        }
+
+                        //switch (p.PropertyType.FullName)
+                        switch (propertyTypeFullName)
                         {
                             case "System.String":
                                 p.SetValue(result, cell.GetValue<string>());
@@ -369,6 +379,9 @@ namespace EveToBMW
                             case "System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
                                 p.SetValue(result, cell.GetValue<long>());
                                 break;
+                            case "System.Nullable`1[[System.Double, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]":
+                                p.SetValue(result, cell.GetValue<double>());
+                                break;
                             case "System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
                                 p.SetValue(result, cell.GetValue<decimal>());
                                 break;
@@ -386,7 +399,7 @@ namespace EveToBMW
                         }
 
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         var colName = GetExcelName(p);
                         var cell = worksheet.Cells[row, dictHeader[colName.Name]];
