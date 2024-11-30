@@ -46,7 +46,7 @@ namespace EveToBMW
         private void btnChoice_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Microsoft Excel files(*.xls)|*.xls;*.xlsx";
+            dialog.Filter = "Microsoft Excel files(*.xlsx)|*.xlsx";//支持支读取 *.xlsx
             //dialog.InitialDirectory = "";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
