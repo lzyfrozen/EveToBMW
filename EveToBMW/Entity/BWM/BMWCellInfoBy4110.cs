@@ -16,15 +16,20 @@ namespace EveToBMW
         public DoubleBy4110 cell_supplier_energy_wh = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_resistance_ac_w = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_resistance_dc_mw = new DoubleBy4110();
+        public DoubleBy4110 cell_supplier_resistance_dc_temperature_celsius = new DoubleBy4110();   //add
+        public DoubleBy4110 cell_supplier_resistance_uncompensated_dc_mw = new DoubleBy4110();      //add
         public DoubleBy4110 cell_supplier_short_voltage_v = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_short_current_mW = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_weight_g = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_weight_electrolyte_g = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_diameter_top_0deg_mm = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_diameter_bot_0deg_mm = new DoubleBy4110();
-        public DoubleBy4110 cell_supplier_total_height_mp29_mean_mm = new DoubleBy4110();
-        public DoubleBy4110 cell_supplier_total_height_mp29_med_mm = new DoubleBy4110();
-        public DoubleBy4110 cell_supplier_total_height_mp29_std_mm = new DoubleBy4110();
+        //public DoubleBy4110 cell_supplier_total_height_mp29_mean_mm = new DoubleBy4110();
+        //public DoubleBy4110 cell_supplier_total_height_mp29_med_mm = new DoubleBy4110();
+        //public DoubleBy4110 cell_supplier_total_height_mp29_std_mm = new DoubleBy4110();
+        public DoubleBy4110 cell_supplier_batch_terminal_height_mean_mm = new DoubleBy4110();      //add
+        public DoubleBy4110 cell_supplier_batch_terminal_height_med_mm = new DoubleBy4110();       //add
+        public DoubleBy4110 cell_supplier_batch_terminal_height_std_mm = new DoubleBy4110();       //add
         public DoubleBy4110 cell_supplier_batch_vent_pressure_mean_pa = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_batch_vent_pressure_med_pa = new DoubleBy4110();
         public DoubleBy4110 cell_supplier_batch_vent_pressure_std_pa = new DoubleBy4110();
@@ -37,7 +42,8 @@ namespace EveToBMW
         public DoubleOrNullBy4110 cell_supplier_diameter_mid_240deg_mm = new DoubleOrNullBy4110();
         public DoubleOrNullBy4110 cell_supplier_diameter_bot_120deg_mm = new DoubleOrNullBy4110();
         public DoubleOrNullBy4110 cell_supplier_diameter_bot_240deg_mm = new DoubleOrNullBy4110();
-        public DoubleBy4110 cell_supplier_total_height_mp29_n = new DoubleBy4110();
+        //public DoubleBy4110 cell_supplier_total_height_mp29_n = new DoubleBy4110();
+        public DoubleOrNullBy4110 cell_supplier_batch_terminal_height_n = new DoubleOrNullBy4110();
         public DoubleOrNullBy4110 cell_supplier_batch_vent_pressure_n = new DoubleOrNullBy4110();
     }
 

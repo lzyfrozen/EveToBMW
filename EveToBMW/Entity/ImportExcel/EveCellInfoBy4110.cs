@@ -34,6 +34,14 @@ namespace EveToBMW
         [ExcelName("cell_supplier_resistance_dc_mw")]
         public double cell_supplier_resistance_dc_mw { get; set; }
 
+
+        [ExcelName("cell_supplier_resistance_dc_temperature_celsius")]
+        public double cell_supplier_resistance_dc_temperature_celsius { get; set; } //2025.4.22新增
+
+        [ExcelName("cell_supplier_resistance_uncompensated_dc_mw")]
+        public double cell_supplier_resistance_uncompensated_dc_mw { get; set; }    //2025.4.22新增
+
+
         [ExcelName("cell_supplier_short_voltage_v")]
         public double cell_supplier_short_voltage_v { get; set; }
 
@@ -52,14 +60,23 @@ namespace EveToBMW
         [ExcelName("cell_supplier_diameter_bot_0deg_mm")]
         public double cell_supplier_diameter_bot_0deg_mm { get; set; }
 
-        [ExcelName("cell_supplier_total_height_mp29_mean_mm")]
-        public double cell_supplier_total_height_mp29_mean_mm { get; set; }
 
-        [ExcelName("cell_supplier_total_height_mp29_med_mm")]
-        public double cell_supplier_total_height_mp29_med_mm { get; set; }
+        //[ExcelName("cell_supplier_total_height_mp29_mean_mm")]
+        //public double cell_supplier_total_height_mp29_mean_mm { get; set; }   //2025.4.22删除
 
-        [ExcelName("cell_supplier_total_height_mp29_std_mm")]
-        public double cell_supplier_total_height_mp29_std_mm { get; set; }
+        //[ExcelName("cell_supplier_total_height_mp29_med_mm")]
+        //public double cell_supplier_total_height_mp29_med_mm { get; set; }    //2025.4.22删除
+
+        //[ExcelName("cell_supplier_total_height_mp29_std_mm")]
+        //public double cell_supplier_total_height_mp29_std_mm { get; set; }    //2025.4.22删除
+
+        [ExcelName("cell_supplier_batch_terminal_height_mean_mm")]
+        public double cell_supplier_batch_terminal_height_mean_mm { get; set; } //2025.4.22新增
+        [ExcelName("cell_supplier_batch_terminal_height_med_mm")]
+        public double cell_supplier_batch_terminal_height_med_mm { get; set; }  //2025.4.22新增
+        [ExcelName("cell_supplier_batch_terminal_height_std_mm")]
+        public double cell_supplier_batch_terminal_height_std_mm { get; set; }  //2025.4.22新增
+
 
         [ExcelName("cell_supplier_batch_vent_pressure_mean_pa")]
         public double cell_supplier_batch_vent_pressure_mean_pa { get; set; }
@@ -97,8 +114,14 @@ namespace EveToBMW
         [ExcelName("cell_supplier_diameter_bot_240deg_mm")]
         public double? cell_supplier_diameter_bot_240deg_mm { get; set; }
 
-        [ExcelName("cell_supplier_total_height_mp29_n")]
-        public double cell_supplier_total_height_mp29_n { get; set; }
+
+        //[ExcelName("cell_supplier_total_height_mp29_n")]
+        //public double cell_supplier_total_height_mp29_n { get; set; } //2025.4.22删除
+
+
+        [ExcelName("cell_supplier_batch_terminal_height_n")]
+        public double? cell_supplier_batch_terminal_height_n { get; set; } //2025.4.22新增
+
 
         [ExcelName("cell_supplier_batch_vent_pressure_n")]
         public double? cell_supplier_batch_vent_pressure_n { get; set; }
